@@ -1,0 +1,118 @@
+import random
+import time
+
+
+def randomized_quick_sort(arr):
+  """Sorts the given array using the randomized quicksort algorithm.
+
+  Args:
+    arr: A list of numbers.
+
+  Returns:
+    A sorted list of numbers.
+  """
+
+  if len(arr) <= 1:
+    return arr
+
+  random.shuffle(arr)
+  pivot = arr[0]
+  left = [x for x in arr if x < pivot]
+  middle = [x for x in arr if x == pivot]
+  right = [x for x in arr if x > pivot]
+
+  return randomized_quick_sort(left) + middle + randomized_quick_sort(right)
+
+
+def analyze_quick_sort(variant, arr):
+  """Analyzes the performance of the given quicksort variant.
+
+  Args:
+    variant: A function that implements the quicksort algorithm.
+    arr: A list of numbers.
+
+  Returns:
+    A tuple of two values: the sorted array and the execution time in seconds.
+  """
+
+  start_time = time.perf_counter()
+  sorted_arr = variant(arr)
+  end_time = time.perf_counter()
+  execution_time = end_time - start_time
+
+  return sorted_arr, execution_time
+
+
+# Take user input for the array
+input_str = input("Enter a list of numbers separated by spaces: ")
+arr = [int(x) for x in input_str.split()]
+
+# Test the randomized Quick Sort
+sorted_arr, execution_time = analyze_quick_sort(randomized_quick_sort, arr)
+
+# Print the results
+print("\nRandomized Quick Sort:")
+print("Sorted Array:", sorted_arr)
+print("Execution Time:", execution_time)
+
+
+
++_+_+_+__+_+_+_+_+_+_++_+_+_+_+_+_++_+_+_+++_+_+_+_+_+_+_+_+_+_++_++_+_+++_+_+_+_+_+_+_
+
+//deterministic
+
+import time
+
+
+def quicksort(arr):
+  """Sorts the given array using the deterministic quicksort algorithm.
+
+  Args:
+    arr: A list of numbers.
+
+  Returns:
+    A sorted list of numbers.
+  """
+
+  if len(arr) <= 1:
+    return arr
+
+  pivot = arr[len(arr) // 2]
+  left = [x for x in arr if x < pivot]
+  middle = [x for x in arr if x == pivot]
+  right = [x for x in arr if x > pivot]
+
+  return quicksort(left) + middle + quicksort(right)
+
+
+def deterministic_quick_sort(arr):
+  """Analyzes the performance of the deterministic quicksort algorithm.
+
+  Args:
+    arr: A list of numbers.
+
+  Returns:
+    A tuple of two values: the sorted array and the execution time in seconds.
+  """
+
+  start_time = time.perf_counter()
+  sorted_arr = quicksort(arr)
+  end_time = time.perf_counter()
+  execution_time = end_time - start_time
+
+  return sorted_arr, execution_time
+
+
+# Take user input for the array
+input_str = input("Enter a list of numbers separated by spaces: ")
+arr = [int(x) for x in input_str.split()]
+
+# Test the deterministic Quick Sort
+sorted_arr, execution_time = deterministic_quick_sort(arr)
+
+# Print the results
+print("\nDeterministic Quick Sort:")
+print("Sorted Array:", sorted_arr)
+print("Execution Time:", execution_time)
+
+
